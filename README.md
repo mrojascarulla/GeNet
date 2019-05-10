@@ -12,12 +12,11 @@ To install the required Python packages, install [Anaconda](https://www.anaconda
 bash install_requirements.sh
 ```
 
-Download the NCBI taxonomy by running the following in the main GeNet directory:
+Extact the NCBI taxonomy:
 ```
-wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz
+cd data
 tar -xvzf taxdump.tar.gz
-mv nodes.dmp data
-rm readme.txt names.dmp merged.dmp gencode.dmp gc.prt division.dmp delnodes.dmp citations.dmp taxdump.tar.gz
+rm taxdump.tar.gz
 ```
 
 ### Train the model
