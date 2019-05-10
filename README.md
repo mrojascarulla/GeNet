@@ -15,8 +15,8 @@ bash install_requirements.sh
 Extact the NCBI taxonomy:
 ```
 cd data
-tar -xvzf taxdump.tar.gz
-rm taxdump.tar.gz
+tar -xvzf nodes.dmp.tar.gz
+rm nodes.dmp.tar.gz
 ```
 
 ### Train the model
