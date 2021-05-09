@@ -3,14 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-import numpy as np
 import util
-
-from tensorflow.core.framework import variable_pb2
-from tensorflow.core.protobuf import rewriter_config_pb2
-from tensorflow.python.layers import core as layers_core
-
-import _pickle as pickle
 
 class GENEt(object):
     """

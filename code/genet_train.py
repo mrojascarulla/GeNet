@@ -10,15 +10,10 @@ import tensorflow as tf
 import network
 import taxotree
 import util
-import IPython
 
 from tensorflow.python.client import device_lib
 
-from sklearn.preprocessing import OneHotEncoder
-import _pickle as pickle
-import sys
 import os
-import io
 
 import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(message)s')
@@ -87,12 +82,10 @@ def main(_):
     path_to_dataset = os.path.join(FLAGS.dir_path, FLAGS.dataset_list)
     path_to_genomes = os.path.join(FLAGS.dir_path, 'genomes')
 
-
-    if not os.path.exists(path_to_genomes):
-        print("Downloading genomes...")
-        util.download(path_to_dataset, path_to_genomes)
-        print("Pickle genomes...")
-        util.pickle_genome(path_to_genomes)
+    print("Downloading genomes...")
+    util.download(path_to_dataset, path_to_genomes)
+    print("Pickle genomes...")
+    util.pickle_genome(path_to_genomes)
 
     print("Building taxonomy tree...")
     taxo_tree = taxotree.TaxoTree(path_to_taxo)
@@ -101,6 +94,7 @@ def main(_):
     taxo_tree.trim_to_dataset(path_to_dataset)
     # Load all the genomes to memory 
     taxo_tree.load_genomes(path_to_genomes)
+
 
     config=Config()
     num_groups = []
@@ -115,7 +109,6 @@ def main(_):
     config.weights.append(w_labels)
 
     print("Number of labels: %d" % taxo_tree.num_labels)
-
     # Define dataset generator
     genome_idx = np.arange(len(taxo_tree.genomes))
     def gen():
@@ -184,7 +177,6 @@ def main(_):
             for mb in itertools.count(N.step.eval()):
                 ti = time.time()
                 loss, _= session.run([N.loss, N.update_step])
-
                 session.run(N.step_update, {N.new_step: mb})
 
                 counter = 0
@@ -224,7 +216,6 @@ def main(_):
                     counter += 1
                     if lr_new != N.lr.eval():
                         validation_ac = []
-
 
                     summary = tf.Summary()
                     summary.value.add(tag='Learning_rate',

@@ -2,15 +2,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import IPython
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import time
 
 import numpy as np
 import tensorflow as tf
-import taxotree
 import _pickle as pickle
 import os
 import io
